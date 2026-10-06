@@ -6,254 +6,900 @@
 
   <title>Do You Love Me?</title>
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
     rel="stylesheet"
   >
 
   <style>
+
+    /* ------------------------------
+       RESET
+    ------------------------------ */
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
     }
 
     body {
       min-height: 100vh;
+
       display: flex;
       align-items: center;
       justify-content: center;
 
-      background: #0d1117;
-      color: #f0f6fc;
+      padding: 30px;
+
+      overflow: hidden;
 
       font-family: "DM Sans", sans-serif;
 
-      overflow: hidden;
+      color: #482f35;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(190, 103, 119, 0.09),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 80% 75%,
+          rgba(126, 61, 73, 0.07),
+          transparent 30%
+        ),
+        #f3e9df;
     }
 
-    /* subtle background glow */
+
+    /* ------------------------------
+       PAPER GRAIN
+    ------------------------------ */
 
     body::before {
       content: "";
+
       position: fixed;
-
-      width: 500px;
-      height: 500px;
-
-      background: rgba(88, 166, 255, 0.08);
-
-      border-radius: 50%;
-      filter: blur(100px);
-
-      top: 50%;
-      left: 50%;
-
-      transform: translate(-50%, -50%);
+      inset: 0;
 
       pointer-events: none;
+
+      opacity: 0.25;
+
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          rgba(90, 60, 50, 0.025) 0px,
+          rgba(90, 60, 50, 0.025) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+
+      z-index: 100;
     }
 
+
+    /* ------------------------------
+       SCRAPBOOK BACKGROUND PIECES
+    ------------------------------ */
+
+    .scrap {
+      position: fixed;
+
+      pointer-events: none;
+
+      opacity: 0.8;
+    }
+
+
+    .scrap-one {
+      width: 190px;
+      height: 130px;
+
+      left: -35px;
+      top: 8%;
+
+      background: #d8a2a7;
+
+      transform: rotate(-13deg);
+
+      clip-path: polygon(
+        4% 10%,
+        96% 0,
+        100% 84%,
+        9% 100%
+      );
+    }
+
+
+    .scrap-two {
+      width: 160px;
+      height: 210px;
+
+      right: -35px;
+      bottom: 4%;
+
+      background: #ead2ca;
+
+      transform: rotate(14deg);
+
+      clip-path: polygon(
+        8% 0,
+        100% 8%,
+        88% 100%,
+        0 91%
+      );
+    }
+
+
+    .scrap-three {
+      width: 120px;
+      height: 85px;
+
+      right: 8%;
+      top: 8%;
+
+      border: 2px solid rgba(118, 65, 75, 0.18);
+
+      transform: rotate(8deg);
+    }
+
+
+    .scrap-four {
+      width: 135px;
+      height: 95px;
+
+      left: 8%;
+      bottom: 7%;
+
+      background:
+        repeating-linear-gradient(
+          0deg,
+          #e9d5cb,
+          #e9d5cb 19px,
+          #cbb4ac 20px
+        );
+
+      transform: rotate(-8deg);
+
+      opacity: 0.55;
+    }
+
+
+    /* ------------------------------
+       MAIN WRAPPER
+    ------------------------------ */
+
+    .wrapper {
+      position: relative;
+
+      width: min(92vw, 570px);
+
+      z-index: 5;
+    }
+
+
+    /* ------------------------------
+       PAPER BEHIND CARD
+    ------------------------------ */
+
+    .paper-back {
+      position: absolute;
+
+      width: 96%;
+      height: 96%;
+
+      left: 3%;
+      top: 3%;
+
+      background: #c9868e;
+
+      transform: rotate(-3deg);
+
+      border-radius:
+        4px 8px 5px 7px;
+
+      box-shadow:
+        0 20px 50px rgba(74, 42, 46, 0.12);
+    }
+
+
+    .paper-back-two {
+      position: absolute;
+
+      width: 94%;
+      height: 95%;
+
+      left: 4%;
+      top: 4%;
+
+      background: #e1b5b3;
+
+      transform: rotate(2.5deg);
+
+      border-radius: 6px;
+    }
+
+
+    /* ------------------------------
+       MAIN PAPER CARD
+    ------------------------------ */
+
     .card {
-      width: min(90%, 500px);
+      position: relative;
 
-      padding: 65px 45px;
+      min-height: 470px;
 
-      background: #161b22;
+      padding:
+        75px
+        55px
+        55px;
 
-      border: 1px solid #30363d;
-      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
       text-align: center;
 
+      background:
+        linear-gradient(
+          rgba(255, 252, 247, 0.94),
+          rgba(250, 241, 232, 0.94)
+        );
+
+      border: 1px solid rgba(101, 65, 65, 0.1);
+
+      border-radius:
+        5px 9px 6px 4px;
+
       box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.4);
+        0 25px 60px rgba(80, 48, 49, 0.17);
 
-      position: relative;
+      overflow: visible;
 
-      animation: appear 0.7s ease;
+      animation: cardIn 0.7s ease;
     }
 
-    @keyframes appear {
+
+    @keyframes cardIn {
+
       from {
         opacity: 0;
-        transform: translateY(15px);
+        transform:
+          translateY(15px)
+          rotate(-0.5deg);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform:
+          translateY(0)
+          rotate(0deg);
       }
+
     }
 
-    .small-text {
-      color: #8b949e;
 
-      font-size: 13px;
+    /* ------------------------------
+       FAKE TAPE
+    ------------------------------ */
+
+    .tape {
+      position: absolute;
+
+      width: 105px;
+      height: 32px;
+
+      top: -14px;
+      left: 50%;
+
+      transform:
+        translateX(-50%)
+        rotate(-2deg);
+
+      background:
+        rgba(211, 174, 162, 0.62);
+
+      box-shadow:
+        inset 0 0 0 1px
+        rgba(255, 255, 255, 0.15);
+
+      z-index: 10;
+    }
+
+
+    .tape::before,
+    .tape::after {
+      content: "";
+
+      position: absolute;
+
+      width: 8px;
+      height: 100%;
+
+      top: 0;
+
+      background: inherit;
+    }
+
+
+    .tape::before {
+      left: -4px;
+
+      clip-path:
+        polygon(
+          100% 0,
+          45% 10%,
+          100% 22%,
+          40% 36%,
+          100% 50%,
+          35% 65%,
+          100% 80%,
+          40% 100%
+        );
+    }
+
+
+    .tape::after {
+      right: -4px;
+
+      clip-path:
+        polygon(
+          0 0,
+          55% 10%,
+          0 22%,
+          60% 36%,
+          0 50%,
+          65% 65%,
+          0 80%,
+          60% 100%
+        );
+    }
+
+
+    /* ------------------------------
+       LITTLE PAPER LABEL
+    ------------------------------ */
+
+    .label {
+      display: inline-block;
+
+      margin-bottom: 27px;
+
+      padding: 7px 15px;
+
+      font-family:
+        "Caveat",
+        cursive;
+
+      font-size: 20px;
       font-weight: 600;
 
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      color: #7e4d56;
 
-      margin-bottom: 20px;
+      background: #ead1cd;
+
+      transform: rotate(-2deg);
+
+      box-shadow:
+        2px 3px 0
+        rgba(109, 65, 71, 0.08);
     }
+
+
+    /* ------------------------------
+       QUESTION
+    ------------------------------ */
 
     h1 {
-      font-size: 42px;
+      max-width: 430px;
+
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size: clamp(
+        35px,
+        6vw,
+        48px
+      );
+
+      line-height: 1.15;
+
       font-weight: 600;
 
-      letter-spacing: -1.5px;
+      letter-spacing: -1px;
+
+      color: #4b3036;
 
       margin-bottom: 15px;
     }
 
-    .subtitle {
-      color: #8b949e;
 
-      font-size: 16px;
+    .underline {
+      width: 85px;
+      height: 5px;
 
-      margin-bottom: 45px;
+      margin:
+        4px auto
+        19px;
+
+      background: #b76673;
+
+      border-radius:
+        50% 30% 60% 40%;
+
+      transform: rotate(-2deg);
     }
+
+
+    .subtitle {
+      font-family:
+        "Caveat",
+        cursive;
+
+      font-size: 22px;
+
+      color: #87676b;
+
+      margin-bottom: 39px;
+    }
+
+
+    /* ------------------------------
+       BUTTON AREA
+    ------------------------------ */
 
     .buttons {
       position: relative;
 
-      height: 70px;
-
       width: 100%;
+      height: 105px;
     }
+
 
     button {
       position: absolute;
 
-      width: 125px;
-      height: 48px;
+      width: 130px;
+      height: 50px;
 
-      border-radius: 8px;
+      border: none;
 
-      font-family: inherit;
+      font-family:
+        "DM Sans",
+        sans-serif;
 
       font-size: 15px;
       font-weight: 600;
 
       cursor: pointer;
 
-      transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease;
+      user-select: none;
+
+      border-radius:
+        4px 6px 5px 3px;
     }
+
+
+    /* ------------------------------
+       YES BUTTON
+    ------------------------------ */
 
     #yes {
-      left: calc(50% - 135px);
+      left: calc(50% - 140px);
+      top: 15px;
 
-      background: #f0f6fc;
-      color: #0d1117;
+      color: #fffaf6;
 
-      border: 1px solid #f0f6fc;
+      background: #a95664;
+
+      box-shadow:
+        4px 5px 0 #743d48;
+
+      transform: rotate(-1deg);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
+
 
     #yes:hover {
-      background: #ffffff;
+      transform:
+        rotate(-1deg)
+        translateY(-3px);
 
-      transform: translateY(-2px);
+      box-shadow:
+        5px 8px 0 #743d48;
     }
+
+
+    #yes:active {
+      transform:
+        rotate(-1deg)
+        translateY(2px);
+
+      box-shadow:
+        2px 3px 0 #743d48;
+    }
+
+
+    /* ------------------------------
+       NO BUTTON
+    ------------------------------ */
 
     #no {
       left: calc(50% + 10px);
+      top: 15px;
 
-      background: transparent;
-      color: #c9d1d9;
+      color: #6e4d52;
 
-      border: 1px solid #30363d;
+      background: #ead6cf;
+
+      border:
+        1px solid
+        rgba(101, 68, 72, 0.14);
+
+      box-shadow:
+        3px 4px 0
+        rgba(106, 68, 72, 0.18);
+
+      transform: rotate(1deg);
 
       transition:
-        left 0.18s ease,
-        top 0.18s ease,
-        background 0.2s ease;
+        left 0.16s ease,
+        top 0.16s ease;
     }
 
-    #no:hover {
-      background: #21262d;
+
+    /* ------------------------------
+       LITTLE SCRIBBLES
+    ------------------------------ */
+
+    .scribble {
+      position: absolute;
+
+      font-family:
+        "Caveat",
+        cursive;
+
+      color:
+        rgba(128, 77, 84, 0.45);
+
+      pointer-events: none;
     }
+
+
+    .scribble-one {
+      top: 70px;
+      left: 30px;
+
+      font-size: 28px;
+
+      transform: rotate(-12deg);
+    }
+
+
+    .scribble-two {
+      right: 25px;
+      bottom: 25px;
+
+      font-size: 24px;
+
+      transform: rotate(8deg);
+    }
+
+
+    /* ------------------------------
+       YES MESSAGE
+    ------------------------------ */
 
     .message {
-      min-height: 25px;
+      position: absolute;
 
-      margin-top: 25px;
+      inset: 0;
 
-      color: #8b949e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-      font-size: 14px;
+      padding: 45px;
+
+      background:
+        linear-gradient(
+          rgba(255, 250, 245, 0.98),
+          rgba(247, 232, 224, 0.98)
+        );
 
       opacity: 0;
 
-      transition: opacity 0.3s ease;
+      visibility: hidden;
+
+      transition:
+        opacity 0.45s ease,
+        visibility 0.45s ease;
+
+      z-index: 20;
     }
+
 
     .message.show {
       opacity: 1;
+      visibility: visible;
     }
 
-    @media (max-width: 520px) {
-      .card {
-        padding: 50px 25px;
+
+    .message-small {
+      font-family:
+        "Caveat",
+        cursive;
+
+      font-size: 23px;
+
+      color: #9a626b;
+
+      margin-bottom: 13px;
+
+      transform: rotate(-2deg);
+    }
+
+
+    .message h2 {
+      font-family:
+        "Playfair Display",
+        serif;
+
+      font-size: 43px;
+
+      color: #4b3036;
+
+      margin-bottom: 18px;
+    }
+
+
+    .message p {
+      max-width: 320px;
+
+      font-family:
+        "Caveat",
+        cursive;
+
+      font-size: 24px;
+
+      color: #795a5e;
+
+      line-height: 1.35;
+    }
+
+
+    /* ------------------------------
+       SMALL DECORATIVE PAPER
+    ------------------------------ */
+
+    .tiny-paper {
+      position: absolute;
+
+      width: 60px;
+      height: 45px;
+
+      background: #d7a2a5;
+
+      right: -17px;
+      top: 85px;
+
+      transform: rotate(13deg);
+
+      z-index: -1;
+    }
+
+
+    .tiny-paper-two {
+      position: absolute;
+
+      width: 75px;
+      height: 52px;
+
+      background: #ead6cb;
+
+      left: -25px;
+      bottom: 65px;
+
+      transform: rotate(-10deg);
+
+      z-index: -1;
+    }
+
+
+    /* ------------------------------
+       MOBILE
+    ------------------------------ */
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 20px;
       }
+
+
+      .wrapper {
+        width: 95vw;
+      }
+
+
+      .card {
+        min-height: 450px;
+
+        padding:
+          65px
+          25px
+          45px;
+      }
+
 
       h1 {
-        font-size: 34px;
+        font-size: 36px;
       }
+
+
+      .subtitle {
+        font-size: 20px;
+      }
+
+
+      .buttons {
+        height: 125px;
+      }
+
 
       button {
-        width: 105px;
+        width: 110px;
       }
+
 
       #yes {
-        left: calc(50% - 115px);
+        left:
+          calc(50% - 120px);
       }
 
+
       #no {
-        left: calc(50% + 10px);
+        left:
+          calc(50% + 10px);
       }
+
+
+      .scribble {
+        display: none;
+      }
+
+
+      .message h2 {
+        font-size: 35px;
+      }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <main class="card" id="card">
 
-    <div class="small-text">
-      IMPORTANT QUESTION
-    </div>
+  <!-- Background scrapbook pieces -->
 
-    <h1>
-      Do you love me?
-    </h1>
+  <div class="scrap scrap-one"></div>
+  <div class="scrap scrap-two"></div>
+  <div class="scrap scrap-three"></div>
+  <div class="scrap scrap-four"></div>
 
-    <p class="subtitle">
-      Choose carefully.
-    </p>
 
-    <div class="buttons" id="buttonArea">
+  <!-- Main scrapbook card -->
 
-      <button id="yes">
-        Yes
-      </button>
+  <div class="wrapper">
 
-      <button id="no">
-        No
-      </button>
+    <div class="paper-back"></div>
+    <div class="paper-back-two"></div>
 
-    </div>
+    <div class="tiny-paper"></div>
+    <div class="tiny-paper-two"></div>
 
-    <div class="message" id="message">
-      Correct answer.
-    </div>
 
-  </main>
+    <main class="card" id="card">
+
+      <div class="tape"></div>
+
+
+      <div class="scribble scribble-one">
+        just wondering...
+      </div>
+
+
+      <div class="scribble scribble-two">
+        choose wisely
+      </div>
+
+
+      <div class="label">
+        a very important question
+      </div>
+
+
+      <h1>
+        Daniel, do you love me?
+      </h1>
+
+
+      <div class="underline"></div>
+
+
+      <p class="subtitle">
+        there is definitely a right answer
+      </p>
+
+
+      <div
+        class="buttons"
+        id="buttonArea"
+      >
+
+        <button id="yes">
+          YES
+        </button>
+
+        <button id="no">
+          NO
+        </button>
+
+      </div>
+
+
+      <!-- Shows after YES -->
+
+      <div
+        class="message"
+        id="message"
+      >
+
+        <div class="message-small">
+          noted for the record
+        </div>
+
+        <h2>
+          I knew it.
+        </h2>
+
+        <p>
+          Your answer has been carefully documented
+          and cannot be changed.
+        </p>
+
+      </div>
+
+    </main>
+
+  </div>
+
 
   <script>
+
+    /* --------------------------------
+       ELEMENTS
+    -------------------------------- */
 
     const noButton =
       document.getElementById("no");
@@ -268,35 +914,182 @@
       document.getElementById("message");
 
 
-    /* NO button runs away */
+    /* --------------------------------
+       KEEP TRACK OF MOUSE
+    -------------------------------- */
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+
+    document.addEventListener(
+      "mousemove",
+      function(event) {
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+      }
+    );
+
+
+    /* --------------------------------
+       MOVE NO BUTTON AWAY
+    -------------------------------- */
 
     function moveNoButton() {
 
-      const areaRect =
+      const area =
         buttonArea.getBoundingClientRect();
 
-      const buttonRect =
+      const button =
         noButton.getBoundingClientRect();
 
+
+      const buttonWidth =
+        button.width;
+
+      const buttonHeight =
+        button.height;
+
+
       const maxX =
-        areaRect.width - buttonRect.width;
+        area.width -
+        buttonWidth;
 
       const maxY =
-        areaRect.height - buttonRect.height;
+        area.height -
+        buttonHeight;
 
-      const randomX =
-        Math.random() * maxX;
 
-      const randomY =
-        Math.random() * maxY;
+      let bestX = 0;
+      let bestY = 0;
+
+      let bestDistance = -1;
+
+
+      /*
+        Generate several possible positions.
+
+        We keep whichever position is
+        FARthest from the mouse.
+      */
+
+      for (
+        let i = 0;
+        i < 25;
+        i++
+      ) {
+
+        const candidateX =
+          Math.random() *
+          Math.max(maxX, 0);
+
+        const candidateY =
+          Math.random() *
+          Math.max(maxY, 0);
+
+
+        const screenX =
+          area.left +
+          candidateX +
+          buttonWidth / 2;
+
+        const screenY =
+          area.top +
+          candidateY +
+          buttonHeight / 2;
+
+
+        const distance =
+          Math.hypot(
+            screenX - mouseX,
+            screenY - mouseY
+          );
+
+
+        if (
+          distance >
+          bestDistance
+        ) {
+
+          bestDistance =
+            distance;
+
+          bestX =
+            candidateX;
+
+          bestY =
+            candidateY;
+
+        }
+
+      }
+
 
       noButton.style.left =
-        randomX + "px";
+        bestX + "px";
 
       noButton.style.top =
-        randomY + "px";
+        bestY + "px";
+
     }
 
+
+    /* --------------------------------
+       DESKTOP
+
+       Move BEFORE mouse gets directly
+       over the button.
+    -------------------------------- */
+
+    document.addEventListener(
+      "mousemove",
+      function(event) {
+
+        const button =
+          noButton.getBoundingClientRect();
+
+
+        const buttonCenterX =
+          button.left +
+          button.width / 2;
+
+        const buttonCenterY =
+          button.top +
+          button.height / 2;
+
+
+        const distance =
+          Math.hypot(
+            event.clientX -
+            buttonCenterX,
+
+            event.clientY -
+            buttonCenterY
+          );
+
+
+        /*
+          The button runs away when the
+          mouse gets within 90 pixels.
+        */
+
+        if (
+          distance < 90
+        ) {
+
+          moveNoButton();
+
+        }
+
+      }
+    );
+
+
+    /* --------------------------------
+       EXTRA BACKUP
+    -------------------------------- */
 
     noButton.addEventListener(
       "mouseenter",
@@ -304,7 +1097,11 @@
     );
 
 
-    /* Also works better on phones */
+    /* --------------------------------
+       MOBILE
+
+       NO runs away when touched.
+    -------------------------------- */
 
     noButton.addEventListener(
       "touchstart",
@@ -312,25 +1109,39 @@
 
         event.preventDefault();
 
+        const touch =
+          event.touches[0];
+
+        if (touch) {
+
+          mouseX =
+            touch.clientX;
+
+          mouseY =
+            touch.clientY;
+
+        }
+
         moveNoButton();
 
+      },
+      {
+        passive: false
       }
     );
 
 
-    /* YES button */
+    /* --------------------------------
+       YES
+    -------------------------------- */
 
     yesButton.addEventListener(
       "click",
       function() {
 
-        message.classList.add("show");
-
-        yesButton.textContent =
-          "I knew it.";
-
-        noButton.style.display =
-          "none";
+        message.classList.add(
+          "show"
+        );
 
       }
     );
